@@ -2,9 +2,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Logger;
 import com.maxmind.geoip.LookupService;
 
+
 public class GJListener extends PluginListener {
+	static final Logger log = Logger.getLogger("Minecraft");
 	private final HashMap<String, String> tags = new HashMap<String, String>();
 
 	public void onLogin(Player player) {
@@ -26,14 +29,14 @@ public class GJListener extends PluginListener {
 
 			return path + File.separator + "GeoLiteCity.dat";
 		} catch (final Exception e) {
-			e.printStackTrace();
+			log.severe(e.toString());;
 		}
 		return "";
 	}
 
 	public String parseMsg(Player player) {
 		String ip = player.getIP();
-		String joinString = GeoJoin.properties.joinString;
+		String joinString = GeoJoin.properties.getString("joinString", "<prefix><player> has joined the server from <countryname>");;
 		try {
 			LookupService cl = new LookupService(datPath(),
 					LookupService.GEOIP_MEMORY_CACHE);
@@ -76,6 +79,7 @@ public class GJListener extends PluginListener {
 			tags.put("<white>", Colors.White);
 			tags.put("<yellow>", Colors.Yellow);
 
+			@SuppressWarnings("rawtypes")
 			Iterator iterator = tags.keySet().iterator();
 			while (iterator.hasNext()) {
 				String tag = (String) iterator.next();
@@ -84,7 +88,7 @@ public class GJListener extends PluginListener {
 			}
 			cl.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.severe(e.toString());;
 		}
 		return joinString;
 	}

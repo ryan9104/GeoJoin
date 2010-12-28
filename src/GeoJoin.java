@@ -2,10 +2,10 @@ import java.util.logging.Logger;
 
 public class GeoJoin extends Plugin {
 	static final GJListener listener = new GJListener();
-	public final static Properties properties = new Properties();
+	public static PropertiesFile properties = new PropertiesFile("GeoJoin.properties");
     private Logger log;
     private String name = "GeoJoin";
-    private String version = "0.6";
+    private String version = "0.7";
 
     public void enable() {
     }
@@ -18,8 +18,5 @@ public class GeoJoin extends Plugin {
         log.info(name + " " + version + " initialized");
         
         etc.getLoader().addListener(PluginLoader.Hook.LOGIN,listener,this,PluginListener.Priority.MEDIUM);
-        
-        GeoJoin.properties.Read();
-        GeoJoin.properties.Write();
     }
 }
