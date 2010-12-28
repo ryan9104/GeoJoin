@@ -41,7 +41,6 @@ public class GJListener extends PluginListener {
 			LookupService cl = new LookupService(datPath(),
 					LookupService.GEOIP_MEMORY_CACHE);
 			com.maxmind.geoip.Location l = cl.getLocation(ip);
-			com.maxmind.geoip.Location s = cl.getLocation("74.125.95.103");
 
 			// player shit
 			tags.put("<player>", player.getName());
@@ -59,7 +58,6 @@ public class GJListener extends PluginListener {
 			tags.put("<latitude>", Float.toString(l.latitude));
 			tags.put("<longitude>", Float.toString(l.longitude));
 			tags.put("<metrocode>", Integer.toString(l.metro_code));
-			tags.put("<distance>", Double.toString(l.distance(s)));
 
 			// color
 			tags.put("<black>", Colors.Black);
