@@ -36,7 +36,7 @@ public class GJListener extends PluginListener {
 
 	public String parseMsg(Player player) {
 		String ip = player.getIP();
-		String joinString = GeoJoin.properties.getString("joinString", "<prefix><player> has joined the server from <countryname>");;
+		String joinString = GeoJoin.properties.getString("joinString", "<prefix><player> <green>has joined the server from <blue><countryname>.");;
 		try {
 			LookupService cl = new LookupService(datPath(),
 					LookupService.GEOIP_MEMORY_CACHE);
